@@ -1,9 +1,12 @@
-import "./App.css";
-import React, { useState, useEffect, useRef } from "react";
+import styles from "./App.module.scss";
+import React, { useState, useEffect } from "react";
 import { getOrders, addOrder } from "./services/ordersAPI";
 import Order from "./components/Order";
+import Search from "./components/Search";
+import arrowIcon from "./assets/arrow.svg";
 
 function App() {
+  const { appStyle, idStyle, sorteble } = styles;
   const [orders, setOrders] = useState(null);
 
   const order = {
@@ -26,16 +29,18 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <button onClick={addOrderHandler}>Add Order</button>
-      {/* <Search/> */}
+    <div className={appStyle}>
+      <header>
+        <button onClick={addOrderHandler}>Add Order</button>
+        <Search />
+      </header>
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
+            <th className={idStyle}>ID<img src={arrowIcon} alt="sort by date" /></th>
+            <th className={sorteble}>Name<img src={arrowIcon} alt="sort by date" /></th>
             <th>Weigth</th>
-            <th>Date</th>
+            <th className={sorteble}>Date<img src={arrowIcon} alt="sort by date" /></th>
             <th>Available</th>
             <th>Customer</th>
           </tr>
