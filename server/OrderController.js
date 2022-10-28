@@ -12,8 +12,9 @@ class OrderController {
 
   async postOrder(req, res) {
     try {
-      await OrderService.add(req.body);
-      res.status(200).json("Server working on POST....");
+      const order = req.body;
+      await OrderService.add(order);
+      res.status(200).json(order);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -21,8 +22,9 @@ class OrderController {
 
   async deleteOrder(req, res) {
     try {
-      await OrderService.delete(req.body.id);
-      res.status(200).json("Server working on DELETE....");
+      const order = req.body;
+      await OrderService.delete(order.id);
+      res.status(200).json(order);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -30,8 +32,9 @@ class OrderController {
 
   async putOrder(req, res) {
     try {
-      await OrderService.update(req.body);
-      res.status(200).json("Server working on PUT....");
+      const order = req.body;
+      await OrderService.update(order);
+      res.status(200).json(order);
     } catch (err) {
       res.status(500).json(err);
     }
