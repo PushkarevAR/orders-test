@@ -1,14 +1,16 @@
 import styles from "./App.module.scss";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { getOrders, addOrder } from "./services/ordersAPI";
 import Order from "./components/Order";
 import Search from "./components/Search";
 import arrowIcon from "./assets/arrow.svg";
 import { Context } from ".";
 import { observer } from "mobx-react-lite";
+import Modal from "./components/modals/Modal";
 
 const App = observer(() => {
   const { appStyle, idStyle, sorteble } = styles;
+  const [modal, setModal] = useState({isActive: false, type: null});
   const { orderStore } = useContext(Context);
   const isLoading = !orderStore.orders ? true : false;
 
@@ -16,8 +18,9 @@ const App = observer(() => {
     getOrders().then((orders) => orderStore.setOrders(orders));
   }, [orderStore]);
 
+  // DELETE
   useEffect(() => {
-    console.log('rerender');
+    console.log("rerender");
   });
 
   const test = {
@@ -30,13 +33,15 @@ const App = observer(() => {
   };
 
   const addOrderHandler = () => {
-    addOrder(test)
-      .then(() => getOrders())
-      .then((orders) => orderStore.setOrders(orders));
+    setModal({isActive: true, type: 'add'});
+    // addOrder(test)
+    //   .then(() => getOrders())
+    //   .then((orders) => orderStore.setOrders(orders));
   };
 
   return (
     <div className={appStyle}>
+      <Modal isActive={modal.isActive} type={modal.type} setActive={setModal} />
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
@@ -67,7 +72,7 @@ const App = observer(() => {
             </thead>
             <tbody>
               {orderStore.orders.map((order) => (
-                <Order key={order.id} order={order} />
+                <Order key={order.id} order={order} setModal={setModal} />
               ))}
             </tbody>
           </table>

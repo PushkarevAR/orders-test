@@ -5,23 +5,23 @@ import deleteIcon from "../assets/delete.svg";
 import styles from "./Order.module.scss";
 import { Context } from "..";
 
-const Order = ({ order }) => {
+const Order = ({ order, setModal }) => {
   const { orderStyle, controls } = styles;
   const { orderStore } = useContext(Context);
 
   const editHandler = () => {
-    editOrder(order)
-      .then(() => getOrders())
-      .then((orders) => orderStore.setOrders(orders));
+    setModal({isActive: true, type: 'edit'});
+    // editOrder(order)
+    //   .then(() => getOrders())
+    //   .then((orders) => orderStore.setOrders(orders));
   };
 
   const deleteHandler = () => {
-    deleteOrder(order)
-      .then(() => getOrders())
-      .then((orders) => orderStore.setOrders(orders));
+    setModal({isActive: true, type: 'delete'})
+    // deleteOrder(order)
+    //   .then(() => getOrders())
+    //   .then((orders) => orderStore.setOrders(orders));
   };
-
-  //getOrders().then((orders) => orderStore.setOrders(orders))
 
   return (
     <>

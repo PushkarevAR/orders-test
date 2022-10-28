@@ -1,0 +1,52 @@
+.modalStyle {
+  z-index: 1000;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+
+  div {
+    padding: 32px;
+    border-radius: 16px;
+    background-color: white;
+
+    span{
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      input{
+        margin-left: 20px;
+        border: 1px solid rgb(189, 189, 189);
+        border-radius: 12px;
+        padding: 6px 12px 6px 12px;
+      }
+
+      input[type='checkbox'] {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    button:first-child{
+      background-color: rgb(210, 255, 210);
+      // margin-right: 20px;
+    }
+    button:last-child{
+      background-color: rgb(255, 203, 203);
+      // margin-right: 20px;
+    }
+  }
+}
+
+.activeStyle {
+  display: flex;
+  pointer-events: all;
+}
