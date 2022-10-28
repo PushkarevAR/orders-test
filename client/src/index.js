@@ -1,11 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React, { createContext } from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import OrderStore from "./store/OrderStore";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+export const Context = createContext(null);
 root.render(
-  <React.StrictMode>
+  <Context.Provider value={{ orderStore: new OrderStore() }}>
     <App />
-  </React.StrictMode>
+  </Context.Provider>
 );
