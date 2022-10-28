@@ -8,8 +8,13 @@ class OrderService {
 
   async add(order) {
     const orders = await this.getAll();
+    // ID?
+    const lastId = orders[orders.length -1].id;
+    order = {...order, id: lastId + 1};
+
     const data = [...orders, order];
     await fs.writeFile("./orders.json", JSON.stringify(data, null, 2));
+    return order;
   }
 
   async delete(id) {
