@@ -1,26 +1,17 @@
-import React, { useContext } from "react";
-import { getOrders, editOrder, deleteOrder } from "../services/ordersAPI";
+import React from "react";
 import editIcon from "../assets/edit.svg";
 import deleteIcon from "../assets/delete.svg";
 import styles from "./Order.module.scss";
-import { Context } from "..";
 
 const Order = ({ order, setModal }) => {
   const { orderStyle, controls } = styles;
-  const { orderStore } = useContext(Context);
 
   const editHandler = () => {
-    setModal({isActive: true, type: 'edit'});
-    // editOrder(order)
-    //   .then(() => getOrders())
-    //   .then((orders) => orderStore.setOrders(orders));
+    setModal({ isActive: true, type: "edit", source: order });
   };
 
   const deleteHandler = () => {
-    setModal({isActive: true, type: 'delete'})
-    // deleteOrder(order)
-    //   .then(() => getOrders())
-    //   .then((orders) => orderStore.setOrders(orders));
+    setModal({ isActive: true, type: "delete", source: order });
   };
 
   return (

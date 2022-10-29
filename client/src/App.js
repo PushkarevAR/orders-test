@@ -1,6 +1,6 @@
 import styles from "./App.module.scss";
 import React, { useEffect, useContext, useState } from "react";
-import { getOrders, addOrder } from "./services/ordersAPI";
+import { getOrders } from "./services/ordersAPI";
 import Order from "./components/Order";
 import Search from "./components/Search";
 import arrowIcon from "./assets/arrow.svg";
@@ -10,7 +10,11 @@ import Modal from "./components/modals/Modal";
 
 const App = observer(() => {
   const { appStyle, idStyle, sorteble } = styles;
-  const [modal, setModal] = useState({isActive: false, type: null});
+  const [modal, setModal] = useState({
+    isActive: false,
+    type: null,
+    source: null,
+  });
   const { orderStore } = useContext(Context);
   const isLoading = !orderStore.orders ? true : false;
 
@@ -23,25 +27,18 @@ const App = observer(() => {
     console.log("rerender");
   });
 
-  const test = {
-    id: 1,
-    name: "fuck",
-    weight: "0.3 kg",
-    date: "11.12.1996",
-    available: true,
-    customer: "John",
-  };
-
   const addOrderHandler = () => {
-    setModal({isActive: true, type: 'add'});
-    // addOrder(test)
-    //   .then(() => getOrders())
-    //   .then((orders) => orderStore.setOrders(orders));
+    setModal({ isActive: true, type: "add", source: null });
   };
 
   return (
     <div className={appStyle}>
-      <Modal isActive={modal.isActive} type={modal.type} setActive={setModal} />
+      <Modal
+        isActive={modal.isActive}
+        type={modal.type}
+        source={modal.source}
+        setActive={setModal}
+      />
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (

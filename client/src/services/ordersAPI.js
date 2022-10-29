@@ -5,7 +5,7 @@ const URL = "http://localhost:5000/orders";
 export const getOrders = async () => {
   try {
     const res = await axios.get(URL);
-    return  res.data;
+    return res.data;
   } catch (err) {
     console.log(err);
   }
@@ -20,17 +20,17 @@ export const addOrder = async (order) => {
 };
 
 export const deleteOrder = async (order) => {
-  try{
-    await axios.delete(URL, {data: order} )
+  try {
+    await axios.delete(URL, { data: order });
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const editOrder = async (order) => {
-  try{
-    await axios.put(URL, {...order, name: order.name + 1});
+  try {
+    await axios.put(URL, order);
   } catch (err) {
     console.log(err);
   }
-}
+};

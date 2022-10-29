@@ -4,19 +4,33 @@ import ModalEdit from "./ModalEdit";
 import ModalDelete from "./ModalDelete";
 import styles from "./Modal.module.scss";
 
-const Modal = ({ isActive, type, setActive }) => {
+const Modal = ({ isActive, type, source, setActive }) => {
   let { modalStyle, activeStyle } = styles;
   if (isActive) modalStyle = `${modalStyle} ${activeStyle}`;
-  console.log(type);
 
   const modalSwitch = (type) => {
     switch (type) {
       case "edit":
-        return <ModalEdit closeModal={() => setActive({ isActive: false, type })}/>;
+        return (
+          <ModalEdit
+            order={source}
+            closeModal={() => setActive({ isActive: false, type })}
+          />
+        );
       case "delete":
-        return <ModalDelete closeModal={() => setActive({ isActive: false, type })}/>;
+        return (
+          <ModalDelete
+            order={source}
+            closeModal={() => setActive({ isActive: false, type })}
+          />
+        );
       case "add":
-        return <ModalAdd closeModal={() => setActive({ isActive: false, type })}/>;
+        return (
+          <ModalAdd
+            order={source}
+            closeModal={() => setActive({ isActive: false, type })}
+          />
+        );
       default:
         return <></>;
     }
