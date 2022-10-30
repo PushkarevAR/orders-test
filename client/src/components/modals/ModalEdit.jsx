@@ -7,20 +7,25 @@ const ModalEdit = ({ order, setModal }) => {
   const { orderStore } = useContext(Context);
   const [editedOrder, setEditedOrder] = useState({ ...order });
 
-  const addOrderHandler = (event) => {
-    event.preventDefault();
+  const addOrderHandler = (e) => {
+    e.preventDefault();
     editOrder(editedOrder)
       .then(() => getOrders())
       .then((orders) => orderStore.setOrders(orders))
       .then(setModal({ isActive: false }));
   };
 
-  const inputHandler = (e) => {
+  const inputChangeHandler = (e) => {
     if (e.target.name === "available") {
       setEditedOrder({ ...editedOrder, [e.target.name]: e.target.checked });
       return;
     }
     setEditedOrder({ ...editedOrder, [e.target.name]: e.target.value });
+  };
+
+  const cancelHandler = (e) => {
+    e.preventDefault();
+    setModal({ isActive: false });
   };
 
   return (
@@ -33,7 +38,7 @@ const ModalEdit = ({ order, setModal }) => {
           type="text"
           required
           value={editedOrder.customer}
-          onChange={inputHandler}
+          onChange={inputChangeHandler}
           placeholder={editedOrder.customer}
         />
       </span>
@@ -43,25 +48,15 @@ const ModalEdit = ({ order, setModal }) => {
           name="available"
           type="checkbox"
           checked={editedOrder.available}
-          onChange={inputHandler}
+          onChange={inputChangeHandler}
         />
       </span>
       <span>
         <button type="submit">Confirm</button>
-        <button
-          onClick={(event) => {
-            event.preventDefault();
-            setModal({ isActive: false });
-          }}
-        >
-          Cancel
-        </button>
+        <button onClick={cancelHandler}>Cancel</button>
       </span>
     </form>
   );
 };
 
 export default ModalEdit;
-
-// Наличие на складе
-// Заказчик

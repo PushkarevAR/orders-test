@@ -1,8 +1,9 @@
-.appStyle {
+.app {
   height: auto;
   width: 1000px;
   margin: auto;
   margin-top: 100px;
+  margin-bottom: 40px;
   padding: 40px;
   background-color: rgb(240, 240, 240);
   border-radius: 24px;
@@ -11,35 +12,42 @@
   header {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   button {
+    cursor: pointer;
     height: 40px;
     width: 120px;
     padding: auto;
-    cursor: pointer;
     font-size: 16px;
     border: 2px solid rgb(220, 220, 220);
     border-radius: 16px;
     background-color: rgb(240, 240, 240);
   }
 
+  button:hover {
+    border: 2px solid rgb(200, 200, 200);
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
   table {
     width: 100%;
     table-layout: fixed;
+
     thead {
       position: relative;
+
       th {
         height: 80px;
         padding: 12px;
-        justify-content: center;
-        align-items: center;
       }
+
       img {
         width: 16px;
         height: 16px;
         padding: auto;
-        padding-top: 2px;
         margin-left: 6px;
         filter: opacity(90%);
       }
@@ -52,21 +60,33 @@
       width: 100%;
       border-top: 1px solid rgb(206, 206, 206);
     }
+
     td {
       text-align: center;
     }
+
     tbody {
       tr:hover {
         border-radius: 24px;
         background-color: rgb(245, 245, 245);
       }
     }
-    .idStyle {
-      width: 80px;
-      cursor: pointer;
-    }
-    .sorteble {
-      cursor: pointer;
+  }
+}
+
+@media (max-width: 1000px) {
+  .app {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: scroll;
+
+    header {
+      padding: 40px 20px 40px 20px;
+      justify-content: space-between;
     }
   }
 }

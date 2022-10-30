@@ -18,8 +18,10 @@ const sortByDate = (isAscending) => {
 
 export const orderSort = (array, type, isAscending, search = "") => {
   array = search
-    ? array.filter((order) =>
-        order.name.toLowerCase().includes(search.toLowerCase())
+    ? array.filter(
+        (order) =>
+          order.name.toLowerCase().includes(search.toLowerCase()) ||
+          order.customer.toLowerCase().includes(search.toLowerCase())
       )
     : array;
 

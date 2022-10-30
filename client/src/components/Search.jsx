@@ -4,7 +4,7 @@ import styles from "./Search.module.scss";
 const Search = ({ value, setSearch }) => {
   const { search } = styles;
 
-  const valueHadnler = (e) => {
+  const searchChangeHandler = (e) => {
     setSearch(e.target.value);
   };
 
@@ -14,8 +14,8 @@ const Search = ({ value, setSearch }) => {
         value={value}
         type="text"
         name="search"
-        placeholder="Search"
-        onChange={valueHadnler}
+        placeholder="Search by name or customer"
+        onChange={searchChangeHandler}
       ></input>
     </div>
   );

@@ -4,7 +4,7 @@ import deleteIcon from "../assets/delete.svg";
 import styles from "./Order.module.scss";
 
 const Order = ({ order, setModal }) => {
-  const { orderStyle, controls } = styles;
+  const { row, controls } = styles;
 
   const editHandler = () => {
     setModal({ isActive: true, type: "edit", source: order });
@@ -16,7 +16,7 @@ const Order = ({ order, setModal }) => {
 
   return (
     <>
-      <tr className={orderStyle}>
+      <tr className={row}>
         <td>{order.id}</td>
         <td>{order.name}</td>
         <td>{order.weight}</td>

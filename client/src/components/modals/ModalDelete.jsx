@@ -6,12 +6,17 @@ import { Context } from "../..";
 const ModalDelete = ({ order, setModal }) => {
   const { orderStore } = useContext(Context);
 
-  const deleteOrderHandler = (event) => {
-    event.preventDefault();
+  const deleteOrderHandler = (e) => {
+    e.preventDefault();
     deleteOrder(order)
       .then(() => getOrders())
       .then((orders) => orderStore.setOrders(orders))
       .then(setModal({ isActive: false }));
+  };
+
+  const cancelHandler = (e) => {
+    e.preventDefault();
+    setModal({ isActive: false });
   };
 
   return (
@@ -21,14 +26,7 @@ const ModalDelete = ({ order, setModal }) => {
       </p>
       <span>
         <button type="submit">Yes</button>
-        <button
-          onClick={(event) => {
-            event.preventDefault();
-            setModal({ isActive: false });
-          }}
-        >
-          No
-        </button>
+        <button onClick={cancelHandler}>No</button>
       </span>
     </form>
   );

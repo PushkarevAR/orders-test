@@ -1,0 +1,18 @@
+.id {
+  width: 80px;
+}
+
+.header {
+  button {
+    width: auto;
+    height: auto;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: none;
+  }
+  button:hover {
+    border: none;
+    background-color: none;
+  }
+}

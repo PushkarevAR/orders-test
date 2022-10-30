@@ -1,8 +1,9 @@
-.orderStyle {
+.row {
   .controls {
     width: 120px;
     display: flex;
     flex-direction: row;
+
     button {
       cursor: pointer;
       display: block;
@@ -14,10 +15,12 @@
       border: none;
       border-radius: 50%;
       background: none;
+
       img {
         filter: opacity(76%);
       }
     }
+
     button:hover {
       transform: scale(1.2, 1.2);
     }
