@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Soap",
+    "weight": "0.3 kg",
+    "date": "2022-12-05",
+    "available": true,
+    "customer": "Alex",
+    "id": 1
+  },
+  {
+    "name": "Potato",
+    "weight": "12 kg",
+    "available": true,
+    "date": "2022-10-14",
+    "customer": "John",
+    "id": 2
+  },
+  {
+    "name": "Puppys",
+    "weight": "20 kg",
+    "available": true,
+    "date": "2022-11-20",
+    "customer": "John Week",
+    "id": 3
+  },
+  {
+    "name": "Icecream",
+    "weight": "4 kg",
+    "available": false,
+    "date": "2021-10-21",
+    "customer": "Anna",
+    "id": 4
+  },
+  {
+    "name": "Rice",
+    "weight": "1 kg",
+    "available": false,
+    "date": "2022-01-02",
+    "customer": "Jack",
+    "id": 5
+  },
+  {
+    "name": "Jaket",
+    "weight": "0.5 kg",
+    "available": true,
+    "date": "2009-10-20",
+    "customer": "David Martinez",
+    "id": 6
+  },
+  {
+    "name": "Guitar",
+    "weight": "1.2 kg",
+    "available": false,
+    "date": "1996-10-20",
+    "customer": "Johnny Silverhand",
+    "id": 7
+  }
+]

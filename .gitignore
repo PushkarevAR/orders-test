@@ -4,8 +4,5 @@
 /client/node_modules
 /server/node_modules
 
-#db
-/server/orders.json
-
 # production
 /client/build
