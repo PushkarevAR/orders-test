@@ -3,16 +3,16 @@ import { editOrder } from "../../services/ordersAPI";
 import { getOrders } from "../../services/ordersAPI";
 import { Context } from "../..";
 
-const ModalEdit = ({ order, closeModal }) => {
+const ModalEdit = ({ order, setModal }) => {
   const { orderStore } = useContext(Context);
-  const [editedOrder, setEditedOrder] = useState(order);
+  const [editedOrder, setEditedOrder] = useState({ ...order });
 
   const addOrderHandler = (event) => {
     event.preventDefault();
     editOrder(editedOrder)
       .then(() => getOrders())
       .then((orders) => orderStore.setOrders(orders))
-      .then(closeModal);
+      .then(setModal({ isActive: false }));
   };
 
   const inputHandler = (e) => {
@@ -32,6 +32,7 @@ const ModalEdit = ({ order, closeModal }) => {
           name="customer"
           type="text"
           required
+          value={editedOrder.customer}
           onChange={inputHandler}
           placeholder={editedOrder.customer}
         />
@@ -50,7 +51,7 @@ const ModalEdit = ({ order, closeModal }) => {
         <button
           onClick={(event) => {
             event.preventDefault();
-            closeModal();
+            setModal({ isActive: false });
           }}
         >
           Cancel

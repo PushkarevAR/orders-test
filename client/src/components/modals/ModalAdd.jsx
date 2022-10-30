@@ -3,16 +3,22 @@ import { addOrder } from "../../services/ordersAPI";
 import { getOrders } from "../../services/ordersAPI";
 import { Context } from "../..";
 
-const ModalAdd = ({ order, closeModal }) => {
+const ModalAdd = ({ order, setModal }) => {
   const { orderStore } = useContext(Context);
-  const [newOrder, setEditedOrder] = useState(order);
+  const [newOrder, setEditedOrder] = useState({
+    name: "-",
+    weight: "-",
+    available: false,
+    date: "00-00-00",
+    customer: "-",
+  });
 
   const addOrderHandler = (event) => {
     event.preventDefault();
     addOrder(newOrder)
       .then(() => getOrders())
       .then((orders) => orderStore.setOrders(orders))
-      .then(closeModal);
+      .then(setModal({ isActive: false}));
   };
 
   const inputHandler = (e) => {
@@ -51,7 +57,7 @@ const ModalAdd = ({ order, closeModal }) => {
         <button
           onClick={(event) => {
             event.preventDefault();
-            closeModal();
+            setModal({ isActive: false });
           }}
         >
           Cancel

@@ -7,6 +7,7 @@ import arrowIcon from "./assets/arrow.svg";
 import { Context } from ".";
 import { observer } from "mobx-react-lite";
 import Modal from "./components/modals/Modal";
+import { orderSort } from "./utils/orderSort";
 
 const App = observer(() => {
   const { appStyle, idStyle, sorteble } = styles;
@@ -15,6 +16,9 @@ const App = observer(() => {
     type: null,
     source: null,
   });
+  const [sortOrder, setSortOrder] = useState({ type: "id", isAscending: true });
+  const [search, setSearch] = useState('');
+
   const { orderStore } = useContext(Context);
   const isLoading = !orderStore.orders ? true : false;
 
@@ -31,13 +35,16 @@ const App = observer(() => {
     setModal({ isActive: true, type: "add", source: null });
   };
 
+  const sortOrderHandler = (type) =>
+    setSortOrder({ type, isAscending: !sortOrder.isAscending });
+
   return (
     <div className={appStyle}>
       <Modal
         isActive={modal.isActive}
         type={modal.type}
         source={modal.source}
-        setActive={setModal}
+        setModal={setModal}
       />
       {isLoading ? (
         <h1>Loading...</h1>
@@ -45,21 +52,27 @@ const App = observer(() => {
         <>
           <header>
             <button onClick={addOrderHandler}>Add Order</button>
-            <Search />
+            <Search value={search} setSearch={setSearch}/>
           </header>
           <table>
             <thead>
               <tr>
-                <th className={idStyle}>
+                <th className={idStyle} onClick={() => sortOrderHandler("id")}>
                   ID
                   <img src={arrowIcon} alt="sort by date" />
                 </th>
-                <th className={sorteble}>
+                <th
+                  className={sorteble}
+                  onClick={() => sortOrderHandler("name")}
+                >
                   Name
                   <img src={arrowIcon} alt="sort by date" />
                 </th>
                 <th>Weigth</th>
-                <th className={sorteble}>
+                <th
+                  className={sorteble}
+                  onClick={() => sortOrderHandler("date")}
+                >
                   Date
                   <img src={arrowIcon} alt="sort by date" />
                 </th>
@@ -68,7 +81,12 @@ const App = observer(() => {
               </tr>
             </thead>
             <tbody>
-              {orderStore.orders.map((order) => (
+              {orderSort(
+                orderStore.orders,
+                sortOrder.type,
+                sortOrder.isAscending,
+                search
+              ).map((order) => (
                 <Order key={order.id} order={order} setModal={setModal} />
               ))}
             </tbody>
