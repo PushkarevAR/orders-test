@@ -20,16 +20,17 @@ const App = observer(() => {
   });
 
   const { orderStore } = useContext(Context);
-  const isLoading = !orderStore.orders ? true : false;
 
   useEffect(() => {
-    getOrders().then((orders) => orderStore.setOrders(orders));
+    getOrders().then((orders) => {
+      orderStore.setOrder(orders);
+    });
   }, [orderStore]);
 
   // DELETE
-  useEffect(() => {
-    console.log("rerender");
-  });
+  // useEffect(() => {
+  //   console.log("rerender");
+  // });
 
   const addOrderHandler = () => {
     setModal({ isActive: true, type: "add" });
@@ -37,15 +38,15 @@ const App = observer(() => {
 
   return (
     <div className={app}>
-      <Modal
-        isActive={modal.isActive}
-        type={modal.type}
-        source={modal.source}
-        setModal={setModal}
-      />
-      {isLoading ? (
-        <h1>Loading...</h1>
-      ) : (
+      <Modal modal={modal} setModal={setModal} />
+      {orderStore.isError && (
+        <>
+          <p>Fetching data error: {orderStore.isError}</p>{" "}
+          <button onClick={() => window.location.reload()}>Refresh page</button>
+        </>
+      )}
+      {orderStore.isLoading && !orderStore.isError && <h1>Loading...</h1>}
+      {orderStore.isSuccess && !orderStore.isError && (
         <>
           <header>
             <button onClick={addOrderHandler}>Add Order</button>
@@ -54,7 +55,7 @@ const App = observer(() => {
           <table>
             <Thead sortOrder={sortOrder} setSortOrder={setSortOrder} />
             <Tbody
-              orderStore={orderStore}
+              orders={orderStore.data}
               sortOrder={sortOrder}
               search={search}
               setModal={setModal}

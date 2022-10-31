@@ -2,35 +2,33 @@ import axios from "axios";
 
 const URL = "http://localhost:5000/orders";
 
-export const getOrders = async () => {
+const httpHandler = async (callback, req = null) => {
+  const order = {
+    isLoading: true,
+    isError: false,
+    isSuccess: false,
+    data: [],
+  };
+
   try {
-    const res = await axios.get(URL);
-    return res.data;
+    const res = req ? await callback(URL, req) : await callback(URL);
+    order.isLoading = false;
+    order.isSuccess = true;
+    order.data = res.data;
   } catch (err) {
-    console.log(err);
+    order.isLoading = false;
+    order.isError = err.message;
+  } finally {
+    // console.log("from client API: ", order);
+    return order;
   }
 };
 
-export const addOrder = async (order) => {
-  try {
-    await axios.post(URL, order);
-  } catch (err) {
-    console.log(err);
-  }
-};
+export const getOrders = async () => await httpHandler(axios.get);
 
-export const deleteOrder = async (order) => {
-  try {
-    await axios.delete(URL, { data: order });
-  } catch (err) {
-    console.log(err);
-  }
-};
+export const addOrder = async (req) => await httpHandler(axios.post, req);
 
-export const editOrder = async (order) => {
-  try {
-    await axios.put(URL, order);
-  } catch (err) {
-    console.log(err);
-  }
-};
+export const deleteOrder = async (req) =>
+  await httpHandler(axios.delete, { data: req });
+
+export const editOrder = async (req) => await httpHandler(axios.put, req);

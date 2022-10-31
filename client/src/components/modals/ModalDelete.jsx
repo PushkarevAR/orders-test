@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { deleteOrder } from "../../services/ordersAPI";
-import { getOrders } from "../../services/ordersAPI";
+import { deleteOrder, getOrders } from "../../services/ordersAPI";
 import { Context } from "../..";
 
 const ModalDelete = ({ order, setModal }) => {
@@ -9,8 +8,8 @@ const ModalDelete = ({ order, setModal }) => {
   const deleteOrderHandler = (e) => {
     e.preventDefault();
     deleteOrder(order)
-      .then(() => getOrders())
-      .then((orders) => orderStore.setOrders(orders))
+      .then((order) => (order.isSuccess ? getOrders() : order))
+      .then((order) => orderStore.setOrder(order))
       .then(setModal({ isActive: false }));
   };
 

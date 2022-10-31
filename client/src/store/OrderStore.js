@@ -1,16 +1,34 @@
-import { makeAutoObservable, toJS } from 'mobx';
+import { makeAutoObservable, toJS } from "mobx";
 
 export default class OrderStore {
   constructor() {
-    this._orders = [];
+    this._isLoading = true;
+    this._isError = false;
+    this._isSuccess = false;
+    this._data = [];
     makeAutoObservable(this);
   }
 
-  setOrders(orders) {
-    this._orders = orders;
+  setOrder(order) {
+    this._isLoading = order.isLoading;
+    this._isError = order.isError;
+    this._isSuccess = order.isSuccess;
+    this._data = order.data;
   }
 
-  get orders() {
-    return toJS(this._orders);
+  get isLoading() {
+    return toJS(this._isLoading);
+  }
+
+  get isError() {
+    return toJS(this._isError);
+  }
+
+  get isSuccess() {
+    return toJS(this._isSuccess);
+  }
+
+  get data() {
+    return toJS(this._data);
   }
 }

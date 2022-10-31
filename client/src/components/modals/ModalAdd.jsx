@@ -1,23 +1,23 @@
 import React, { useContext, useState } from "react";
-import { addOrder } from "../../services/ordersAPI";
-import { getOrders } from "../../services/ordersAPI";
+import { addOrder, getOrders } from "../../services/ordersAPI";
 import { Context } from "../..";
 
 const ModalAdd = ({ setModal }) => {
   const { orderStore } = useContext(Context);
-  const [newOrder, setNewOrder] = useState({
+  const initialState = {
     name: "-",
     weight: "-",
     available: false,
     date: "00-00-00",
     customer: "-",
-  });
+  };
+  const [newOrder, setNewOrder] = useState(initialState);
 
   const addOrderHandler = (e) => {
     e.preventDefault();
     addOrder(newOrder)
-      .then(() => getOrders())
-      .then((orders) => orderStore.setOrders(orders))
+      .then((order) => (order.isSuccess ? getOrders() : order))
+      .then((order) => orderStore.setOrder(order))
       .then(setModal({ isActive: false }));
   };
 

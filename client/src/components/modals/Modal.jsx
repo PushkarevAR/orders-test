@@ -4,10 +4,11 @@ import ModalEdit from "./ModalEdit";
 import ModalDelete from "./ModalDelete";
 import styles from "./Modal.module.scss";
 
-const Modal = ({ isActive, type, source, setModal }) => {
-  let { modal, active } = styles;
+const Modal = ({ modal, setModal }) => {
+  let { modal_wrapper, active } = styles;
+  const { isActive, type, source } = modal;
 
-  if (isActive) modal = `${modal} ${active}`;
+  if (isActive) modal_wrapper = `${modal_wrapper} ${active}`;
 
   const modalSwitch = (type) => {
     switch (type) {
@@ -25,7 +26,10 @@ const Modal = ({ isActive, type, source, setModal }) => {
   return (
     <>
       {isActive && (
-        <div className={modal} onClick={() => setModal({ isActive: false })}>
+        <div
+          className={modal_wrapper}
+          onClick={() => setModal({ isActive: false })}
+        >
           {<div onClick={(e) => e.stopPropagation()}>{modalSwitch(type)}</div>}
         </div>
       )}
