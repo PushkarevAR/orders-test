@@ -19,16 +19,24 @@ const httpHandler = async (callback, req = null) => {
     order.isLoading = false;
     order.isError = err.message;
   } finally {
-    // console.log("from client API: ", order);
     return order;
   }
 };
 
-export const getOrders = async () => await httpHandler(axios.get);
+const getOrders = async () => await httpHandler(axios.get);
 
-export const addOrder = async (req) => await httpHandler(axios.post, req);
+const addOrder = async (req) => await httpHandler(axios.post, req);
 
-export const deleteOrder = async (req) =>
+const deleteOrder = async (req) =>
   await httpHandler(axios.delete, { data: req });
 
-export const editOrder = async (req) => await httpHandler(axios.put, req);
+const editOrder = async (req) => await httpHandler(axios.put, req);
+
+const ordersAPi = {
+  getOrders,
+  addOrder,
+  deleteOrder,
+  editOrder,
+}
+
+export default ordersAPi;

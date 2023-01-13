@@ -1,6 +1,6 @@
 import styles from "./App.module.scss";
 import React, { useEffect, useContext, useState } from "react";
-import { getOrders } from "./services/ordersAPI";
+import ordersAPi from "./services/ordersAPI";
 import Search from "./components/Search";
 import { Context } from ".";
 import { observer } from "mobx-react-lite";
@@ -22,15 +22,10 @@ const App = observer(() => {
   const { orderStore } = useContext(Context);
 
   useEffect(() => {
-    getOrders().then((orders) => {
+    ordersAPi.getOrders().then((orders) => {
       orderStore.setOrder(orders);
     });
   }, [orderStore]);
-
-  // DELETE
-  // useEffect(() => {
-  //   console.log("rerender");
-  // });
 
   const addOrderHandler = () => {
     setModal({ isActive: true, type: "add" });
