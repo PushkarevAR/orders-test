@@ -11,8 +11,18 @@ export const Order = types
     id: types.number,
   })
   .actions((self) => {
+    const shit = {
+      name: self.name,
+      weight: self.weight,
+      date: self.date,
+      available: self.available,
+      customer: self.customer,
+      id: self.id,
+    };
+
     const setAvailable = flow(function* setAvailable() {
-      const resp = yield ordersAPi.editOrder(self);
+      shit.available = !shit.available;
+      const resp = yield ordersAPi.editOrder(shit);
       self.available = resp.available;
     });
     const setCustomer = flow(function* setCustomer() {
@@ -32,11 +42,12 @@ export const Order = types
   .actions((self) => {
     const fetchOrders = flow(function* fetchOrders() {
       const resp = yield ordersAPi.getOrders();
-      self.orders.push(...resp);
+      self.orders.length = 0;
+      self.orders.push(...resp.data);
     });
     const addOrder = flow(function* addOrder(order) {
       const resp = yield ordersAPi.addOrder(order);
-      self.todos.push(resp);
+      self.orders.push(resp.data);
     });
     const deleteOrder = flow(function* deleteOrder(order) {
       yield ordersAPi.deleteOrder(order);

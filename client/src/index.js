@@ -1,14 +1,18 @@
-import React, { createContext } from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import OrderStore from "./store/OrderStore";
+import React, { createContext } from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import { OrdersStoreMST } from './store/OrdersStoreMST';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-export const Context = createContext(null);
+const store = OrdersStoreMST.create({
+  orders: [],
+});
+export const StoreContext = createContext(store);
+
 root.render(
-  <Context.Provider value={{ orderStore: new OrderStore() }}>
+  <StoreContext.Provider value={store}>
     <App />
-  </Context.Provider>
+  </StoreContext.Provider>
 );
