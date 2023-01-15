@@ -2,7 +2,7 @@ import { types, flow, destroy } from 'mobx-state-tree';
 import ordersAPi from '../services/ordersAPI';
 
 export const Order = types
-  .model("Order", {
+  .model('Order', {
     name: types.string,
     weight: types.string,
     date: types.string,
@@ -11,32 +11,18 @@ export const Order = types
     id: types.number,
   })
   .actions((self) => {
-    const shit = {
-      name: self.name,
-      weight: self.weight,
-      date: self.date,
-      available: self.available,
-      customer: self.customer,
-      id: self.id,
-    };
-
     const setAvailable = flow(function* setAvailable() {
-      shit.available = !shit.available;
-      const resp = yield ordersAPi.editOrder(shit);
-      self.available = resp.available;
-    });
-    const setCustomer = flow(function* setCustomer() {
+      self.available = !self.available;
       const resp = yield ordersAPi.editOrder(self);
-      self.customer = resp.customer;
+      self.available = resp.data.available;
     });
     return {
       setAvailable,
-      setCustomer,
     };
   });
 
-  export const OrdersStoreMST = types
-  .model("OrdersStoreMST", {
+export const OrdersStoreMST = types
+  .model('OrdersStoreMST', {
     orders: types.array(Order),
   })
   .actions((self) => {
