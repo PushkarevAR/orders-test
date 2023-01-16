@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true, // Компилировать ли каждый файл в строгом режиме и создавать ли 'use strict' для каждого выходного файла? Требуется TypeScript версии 2.1 или новее.
+    "target": "es6", // Тип кода создаваемого итогового файла.
+    "module": "commonjs", // Определяет тип импорта кода в итоговом файле, прописанном в "outFile". Необходимо задавать при использовании опции "outFile".
+    "jsx": "react", // Включать ли поддержку ".tsx" файлов?
+    "esModuleInterop": true, // Создать хелперы __importStar и __importDefault для обеспечения совместимости с экосистемой Babel и включить allowSyntheticDefaultImports для совместимости с системой типов.
+    "forceConsistentCasingInFileNames": true, // Запретить несогласованные ссылки на один и тот же файл?
+    "strict": true, // Включить ли все строги проверки типов сразу: noImplicitAny, noImplicitThis, alwaysStrict, strictNullChecks, strictFunctionTypes, strictPropertyInitialization?
+    "removeComments": true, // Удалить все комментарии из итогового файла.
+    "sourceMap": false, // Создавать ли соответствующие source map файлы ".map"?
+    "noUnusedLocals": true, // Показывать ошибку, если где-то найдены неиспользуемые локальные значения.
+    // "allowJs": true, // Максимальная глубина поиска зависимостей внутри node_modules и загрузки файлов JavaScript. Применяется только вместе с заданной опцией "allowJs".
+    // "checkJs": true, // Сообщить об ошибках в .js-файлах? Используйте совместно с "allowJs".
+  },
+  "include": ["src/**/*"]
+}

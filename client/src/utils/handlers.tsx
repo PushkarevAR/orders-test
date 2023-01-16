@@ -1,7 +1,8 @@
 import { Button, Checkbox } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
+import React from 'react';
 
-export const utils = (store, order) => (
+export const utils: $TSFixMeFunction = (store, order) => (
   <>
     <Button
       shape='circle'
@@ -12,7 +13,7 @@ export const utils = (store, order) => (
   </>
 );
 
-export const available = (store, order) => {
+export const available: $TSFixMeFunction = (store, order) => {
   return (
     <Checkbox
       checked={order.available}

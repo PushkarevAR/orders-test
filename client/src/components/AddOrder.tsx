@@ -5,7 +5,7 @@ import { StoreContext } from '..';
 const AddOrder = () => {
   const store = useContext(StoreContext);
 
-  const onFinish = (values) => {
+  const onFinish: $TSFixMeFunction = (values) => {
     const newOrder = {
       ...values,
       date: values.date.toISOString().split('T')[0],
@@ -14,7 +14,7 @@ const AddOrder = () => {
     console.log('Success:', newOrder);
     store.addOrder(newOrder);
   };
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed: $TSFixMeFunction = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
   return (

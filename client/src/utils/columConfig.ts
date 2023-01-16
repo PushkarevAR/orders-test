@@ -1,4 +1,4 @@
-export const columns = [
+export const columns: Array<any> = [
   {
     title: 'id',
     dataIndex: 'id',

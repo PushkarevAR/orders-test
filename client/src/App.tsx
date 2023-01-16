@@ -14,7 +14,7 @@ const App = observer(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const dataSource = [];
+  const dataSource: Array<any> = [];
   store.orders.forEach((order) => {
     dataSource.push({
       ...order,
