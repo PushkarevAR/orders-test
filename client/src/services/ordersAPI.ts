@@ -2,7 +2,7 @@ import axios from "axios";
 
 const URL = "http://localhost:5000/orders";
 
-const httpHandler = async (callback, req = null) => {
+const httpHandler = async (callback: $TSFixMe, req = null) => {
   const order = {
     isLoading: true,
     isError: false,
@@ -17,6 +17,7 @@ const httpHandler = async (callback, req = null) => {
     order.data = res.data;
   } catch (err) {
     order.isLoading = false;
+    // @ts-expect-error TS(2571): Object is of type 'unknown'.
     order.isError = err.message;
   } finally {
     return order;
@@ -25,12 +26,12 @@ const httpHandler = async (callback, req = null) => {
 
 const getOrders = async () => await httpHandler(axios.get);
 
-const addOrder = async (req) => await httpHandler(axios.post, req);
+const addOrder = async (req: $TSFixMe) => await httpHandler(axios.post, req);
 
-const deleteOrder = async (req) =>
-  await httpHandler(axios.delete, { data: req });
+// @ts-expect-error TS(2345): Argument of type '{ data: any; }' is not assignabl... Remove this comment to see the full error message
+const deleteOrder = async (req: $TSFixMe) => await httpHandler(axios.delete, { data: req });
 
-const editOrder = async (req) => await httpHandler(axios.put, req);
+const editOrder = async (req: $TSFixMe) => await httpHandler(axios.put, req);
 
 const ordersAPi = {
   getOrders,

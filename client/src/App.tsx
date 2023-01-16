@@ -14,7 +14,7 @@ const App = observer(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const dataSource = [];
+  const dataSource: $TSFixMe = [];
   store.orders.forEach((order) => {
     dataSource.push({
       ...order,
@@ -33,6 +33,7 @@ const App = observer(() => {
       <AddOrder />
       <Table
         dataSource={dataSource}
+        // @ts-expect-error TS(2322): Type '({ title: string; dataIndex: string; key: st... Remove this comment to see the full error message
         columns={columns}
         size='small'
         bordered
